@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sensors",
+  "info": {
+    "singularName": "sensor",
+    "pluralName": "sensors",
+    "displayName": "Sensor",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "Date": {
+      "type": "date",
+      "required": true,
+      "default": "2025-02-14"
+    },
+    "Time": {
+      "type": "time",
+      "required": true,
+      "default": "00:30:00.000"
+    },
+    "pH": {
+      "type": "decimal",
+      "required": true
+    },
+    "Turbidez": {
+      "type": "decimal",
+      "required": true
+    },
+    "TDS": {
+      "type": "decimal",
+      "required": true
+    },
+    "BaterySlave": {
+      "type": "decimal",
+      "required": false
+    },
+    "BateryMaster": {
+      "type": "decimal"
+    },
+    "SensorId": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
