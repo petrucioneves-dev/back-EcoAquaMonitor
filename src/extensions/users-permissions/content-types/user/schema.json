@@ -69,15 +69,14 @@
       "type": "string",
       "required": true
     },
-    "readingTimer": {
+    "aeratorTime": {
       "type": "integer",
-      "default": 20,
-      "required": true
+      "default": 120
     },
-    "aeratorTimer": {
+    "sensorTime": {
       "type": "integer",
-      "default": 100,
-      "required": true
+      "required": false,
+      "default": 60
     }
   }
 }

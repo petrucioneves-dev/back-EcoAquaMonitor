@@ -4,7 +4,8 @@
   "info": {
     "singularName": "notification",
     "pluralName": "notifications",
-    "displayName": "notification"
+    "displayName": "notification",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -14,6 +15,10 @@
       "type": "string",
       "required": true,
       "default": "lasdjlsajld"
+    },
+    "sensorId": {
+      "type": "string",
+      "required": true
     }
   }
 }

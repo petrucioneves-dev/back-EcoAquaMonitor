@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "reading_timers",
+  "info": {
+    "singularName": "reading-timer",
+    "pluralName": "reading-timers",
+    "displayName": "ReadingTimer"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "aeratorTimer": {
+      "type": "integer",
+      "default": 120,
+      "required": true
+    },
+    "sensorTimer": {
+      "type": "integer",
+      "default": 60,
+      "required": true
+    },
+    "sensorId": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

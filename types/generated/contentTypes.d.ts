@@ -373,6 +373,7 @@ export interface ApiNotificationNotification
   extends Struct.CollectionTypeSchema {
   collectionName: 'notifications';
   info: {
+    description: '';
     displayName: 'notification';
     pluralName: 'notifications';
     singularName: 'notification';
@@ -394,6 +395,42 @@ export interface ApiNotificationNotification
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'lasdjlsajld'>;
     publishedAt: Schema.Attribute.DateTime;
+    sensorId: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiReadingTimerReadingTimer
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'reading_timers';
+  info: {
+    displayName: 'ReadingTimer';
+    pluralName: 'reading-timers';
+    singularName: 'reading-timer';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    aeratorTimer: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<120>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::reading-timer.reading-timer'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    sensorId: Schema.Attribute.String & Schema.Attribute.Required;
+    sensorTimer: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<60>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -428,7 +465,7 @@ export interface ApiSensorSensor extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     pH: Schema.Attribute.Decimal & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
-    SensorId: Schema.Attribute.String & Schema.Attribute.Required;
+    sensorId: Schema.Attribute.String & Schema.Attribute.Required;
     TDS: Schema.Attribute.Decimal & Schema.Attribute.Required;
     Time: Schema.Attribute.Time &
       Schema.Attribute.Required &
@@ -897,9 +934,7 @@ export interface PluginUsersPermissionsUser
     draftAndPublish: false;
   };
   attributes: {
-    aeratorTimer: Schema.Attribute.Integer &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<100>;
+    aeratorTime: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<120>;
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     confirmationToken: Schema.Attribute.String & Schema.Attribute.Private;
     confirmed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
@@ -924,15 +959,13 @@ export interface PluginUsersPermissionsUser
       }>;
     provider: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
-    readingTimer: Schema.Attribute.Integer &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<20>;
     resetPasswordToken: Schema.Attribute.String & Schema.Attribute.Private;
     role: Schema.Attribute.Relation<
       'manyToOne',
       'plugin::users-permissions.role'
     >;
     sensor: Schema.Attribute.String & Schema.Attribute.Required;
+    sensorTime: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<60>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -956,6 +989,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::notification.notification': ApiNotificationNotification;
+      'api::reading-timer.reading-timer': ApiReadingTimerReadingTimer;
       'api::sensor.sensor': ApiSensorSensor;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

@@ -40,7 +40,7 @@
     "BateryMaster": {
       "type": "decimal"
     },
-    "SensorId": {
+    "sensorId": {
       "type": "string",
       "required": true
     }
